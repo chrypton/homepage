@@ -5,11 +5,10 @@ export default {
 </script>
 
 <style>
-/* @import url('../../css/fontawesome/css/all.css'); */
-
 :root {
 	--border-color: rgba(155, 155, 155, 1);
 	--box-background: rgba(40, 40, 40, 1);
+	--box-background-secondary: rgba(35, 35, 35, 1);
 	--text-dark: rgba(0, 0, 0, 1);
 	--text-light: rgba(255, 255, 255, 1);
 	--text-error: rgba(255, 0, 0, 1);

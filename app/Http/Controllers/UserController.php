@@ -35,13 +35,15 @@ class UserController extends Controller
 	public function store(Request $request): RedirectResponse
 	{
 		$request->validate([
-			'name' => ['required', 'string', 'min:2', Rule::Unique('users', 'name')],
+			'name' => ['required', 'string'],
+			'username' => ['required', 'string', 'min:4', Rule::Unique('users', 'username')],
 			'email' => ['required', 'string', 'email', 'max:255', Rule::Unique('users', 'email')],
 			'password' => ['required', 'confirmed', 'string', 'min:6']
 		]);
 
 		$user = User::create([
 			'name' => $request->name,
+			'username' => $request->username,
 			'email' => $request->email,
 			'password' => Hash::make($request->password)
 		]);

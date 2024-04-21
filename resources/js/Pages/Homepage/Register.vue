@@ -2,25 +2,30 @@
 	<Head title="Register" />
 	<Base />
 	<!-- <div>Error</div> -->
-	<form @submit.prevent="submit">
+	<form :action="route('users.store')" method="post">
+		<CSRF />
 		<h3>Register</h3>
 		<div>
 			<div>
 				<label for="name">Name:</label>
 				<!-- <span>Error Text</span> -->
-				<input type="text" id="name" v-model="form.name" />
+				<input type="text" id="name" name="name" />
+			</div>
+			<div>
+				<label for="username">Username:</label>
+				<input type="text" id="username" name="username" />
 			</div>
 			<div>
 				<label for="email">Email:</label>
-				<input type="email" id="email" v-model="form.email" />
+				<input type="email" id="email" name="email" />
 			</div>
 			<div>
 				<label for="password">Password:</label>
-				<input type="password" id="password" v-model="form.password" />
+				<input type="password" id="password" name="password" />
 			</div>
 			<div>
 				<label for="password_confirmation">Confirm Password:</label>
-				<input type="password" id="password_confirmation" v-model="form.password_confirmation" />
+				<input type="password" id="password_confirmation" name="password_confirmation" />
 			</div>
 			<div>
 				<button type="submit">Sign Up</button>
@@ -36,6 +41,7 @@
 <script>
 import { Head, Link } from '@inertiajs/vue3';
 import Base from '@/Components/Homepage/Base.vue';
+import CSRF from '@/Components/Forms/CSRF.vue';
 
 export default {
 	name: 'Register',
@@ -43,23 +49,7 @@ export default {
 		Head,
 		Base,
 		Link,
-	},
-	data(){
-		return {
-			form: {
-				'name': '',
-				'email': '',
-				'password': '',
-				'password_confirmation': '',
-			},
-		};
-	},
-	methods: {
-		submit(){
-			axios.post(route('users.store'), this.form).then(() => {
-				window.location.href = route('index');
-			});
-		}
+		CSRF,
 	},
 }
 </script>

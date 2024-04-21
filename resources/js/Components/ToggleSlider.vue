@@ -1,21 +1,17 @@
 <template>
-	<input type="checkbox" :name="finalName" :id="finalName" :checked="modelValue" @change="$emit('update:modelValue', $event.target.checked)" />
-	<label :for="finalName"></label>
+	<input type="checkbox" :name="name" :id="name" :checked="modelValue" @change="$emit('update:modelValue', $event.target.checked)" />
+	<label :for="name"></label>
 </template>
 
 <script>
-import Utils from '@/Classes/Utils.js';
-
 export default {
 	name: 'ToggleSlider',
 	props: {
 		modelValue: Boolean,
-		name: String,
-	},
-	computed: {
-		finalName(){
-			return this.name ?? Utils.randomString(8);
-		}
+		name: {
+			type: String,
+			required: true,
+		},
 	},
 	emits: ['update:modelValue'],
 }

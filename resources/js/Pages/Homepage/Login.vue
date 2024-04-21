@@ -2,17 +2,22 @@
 	<Head title="Log In" />
 	<Base />
 	<!-- <div>Error Text</div> -->
-	<form @submit.prevent="submit">
+	<form :action="route('users.auth')" method="post">
+		<CSRF />
 		<h3>Log In</h3>
 		<div>
 			<div>
-				<label for="name">Name:</label>
+				<label for="username">Username:</label>
 				<!-- <span>Error text</span> -->
-				<input type="text" id="name" v-model="form.name" />
+				<input type="text" id="username" name="username" />
 			</div>
 			<div>
 				<label for="password">Password:</label>
-				<input type="password" id="password" v-model="form.password" />
+				<input type="password" id="password" name="password" />
+			</div>
+			<div>
+				<label for="remember">Remember me</label>
+				<input type="checkbox" id="remember" name="remember" />
 			</div>
 			<div>
 				<button type="submit">Log In</button>
@@ -27,6 +32,7 @@
 <script>
 import { Head, Link } from '@inertiajs/vue3';
 import Base from '@/Components/Homepage/Base.vue';
+import CSRF from '@/Components/Forms/CSRF.vue';
 
 export default {
 	name: 'Login',
@@ -34,21 +40,7 @@ export default {
 		Head,
 		Base,
 		Link,
-	},
-	data(){
-		return {
-			form: {
-				'name': '',
-				'password': '',
-			},
-		};
-	},
-	methods: {
-		submit(){
-			axios.post(route('users.auth'), this.form).then(() => {
-				window.location.href = route('index');
-			});
-		}
+		CSRF,
 	},
 }
 </script>

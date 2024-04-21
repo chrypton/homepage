@@ -7,6 +7,7 @@ use Inertia\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 
 class UserSessionController extends Controller
 {
@@ -32,12 +33,11 @@ class UserSessionController extends Controller
 	public function store(Request $request): RedirectResponse
 	{
 		$request->validate([
-			'name' => ['required', 'string'],
-			'password' => ['required', 'string'],
-			'remember' => ['boolean']
+			'username' => ['required', 'string'],
+			'password' => ['required', 'string']
 		]);
 		
-		if(Auth::attempt($request->only(['name', 'password']), $request->remember)){
+		if(Auth::attempt($request->only(['username', 'password']), $request->boolean('remember'))){
 			return to_route('index');
 		}
 

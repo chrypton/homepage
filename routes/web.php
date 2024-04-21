@@ -5,6 +5,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\UserSessionController;
 
+foreach (glob(__DIR__.'/web/*.php') as $file) {
+	require $file;
+}
+
 Route::middleware('auth')->group(function () {
 	Route::get('/', [HomepageController::class, 'index'])->name('index');
 });

@@ -1,19 +1,26 @@
 <template>
 	<nav>
 		<Navigator />
-		<YouTube />
+		<component v-for="panel in panels" :is="panel" />
 	</nav>
 </template>
 
 <script>
 import Navigator from '@/Components/Homepage/Navigation/Panels/Navigator.vue';
-import YouTube from '@/Components/Homepage/Navigation/Panels/YouTube.vue';
+const panelFiles = import.meta.glob(['./Navigation/Panels/*', '!./Navigation/Panels/Navigator.vue'], { eager: true });
 
 export default {
 	name: 'Navigation',
 	components: {
 		Navigator,
-		YouTube,
+	},
+	data(){
+		return {
+			panels: [],
+		};
+	},
+	created(){
+		this.panels = Object.values(panelFiles).map(panel => panel.default);
 	},
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
 	<Head title="Dashboard" />
-	<Homepage>
+	<Homepage page-name="index">
 		<pre>Under Construction</pre>
 	</Homepage>
 </template>
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style>
-main {
+#index {
 	color: white;
 }
 </style>

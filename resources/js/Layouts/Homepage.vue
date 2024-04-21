@@ -2,7 +2,7 @@
 	<Base />
 	<Header />
 	<Navigation />
-	<main>
+	<main :id="pageName">
 		<slot />
 	</main>
 </template>
@@ -10,7 +10,7 @@
 <script>
 import Base from '@/Components/Homepage/Base.vue';
 import Header from '@/Components/Homepage/Header.vue';
-import Navigation from '@/Components/Homepage/Navigation/Navigation.vue';
+import Navigation from '@/Components/Homepage/Navigation.vue';
 
 export default {
 	name: 'Homepage',
@@ -18,6 +18,12 @@ export default {
 		Base,
 		Header,
 		Navigation,
+	},
+	props: {
+		pageName: {
+			type: String,
+			required: true
+		}
 	},
 }
 </script>

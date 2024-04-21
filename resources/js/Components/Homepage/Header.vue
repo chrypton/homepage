@@ -9,8 +9,6 @@
 </template>
 
 <script>
-import TimeHelper from '@/Classes/TimeHelper.js';
-
 export default {
 	name: 'Header',
 	data(){
@@ -21,49 +19,15 @@ export default {
 		}
 	},
 	methods: {
-		lPad(input, digits = 2, filler = '0'){
-			return String(input).padStart(digits, filler);
-		},
 		updateClock(){
-			const currentTime = new Date();
-		
-			let currentHour = currentTime.getHours();
-			const currentMinute = this.lPad(currentTime.getMinutes());
-			const currentSecond = this.lPad(currentTime.getSeconds());
-		
-			let period = 'AM';
-		
-			if(currentHour === 0){
-				currentHour = 12;
-			} else if(currentHour >= 12){
-				if(currentHour >= 13){
-					currentHour -= 12;
-				}
-		
-				period = 'PM';
-			}
-		
-			this.strTime = `${currentHour}:${currentMinute}:${currentSecond} ${period}`;
-		
-			const currentDay = TimeHelper.days[currentTime.getDay()];
-			const currentMonth = TimeHelper.months[currentTime.getMonth()];
-			const currentDate = currentTime.getDate();
-			const currentOrdinal = TimeHelper.getOrdinal(currentDate);
-			const currentYear = currentTime.getFullYear();
+			const now = dayjs();
 
-			this.strDate = `${currentDay}, ${currentMonth} ${currentDate}${currentOrdinal}, ${currentYear}`;
+			this.strTime = now.format('h:mm:ss A');
+			this.strDate = now.format('dddd, MMMM Do, YYYY');
 		},
 	},
 	created(){
-		const currentTime = new Date();
-
-		const currentYear = currentTime.getFullYear();
-		const currentMonth = this.lPad(currentTime.getMonth() + 1);
-		const currentDate = this.lPad(currentTime.getDate());
-		const currentHour = this.lPad(currentTime.getHours());
-		const currentMinute = this.lPad(currentTime.getMinutes());
-
-		this.strDateTime = `${currentYear}-${currentMonth}-${currentDate} ${currentHour}:${currentMinute}`;
+		this.strDateTime = dayjs().format('YYYY-MM-DD HH:mm');
 
 		this.updateClock();
 
