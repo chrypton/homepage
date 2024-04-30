@@ -44,7 +44,7 @@ export default {
 	},
 	methods: {
 		update(){
-			axios.get(route('youtube')).then(response => this.feed = response.data);
+			axios.get(route('nav.youtube')).then(response => this.feed = response.data);
 		},
 	},
 	created(){

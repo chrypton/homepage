@@ -7,30 +7,17 @@
 			<li>Item 3</li>
 		</template>
 		<ul>
-			<li>
-				<Link :href="route('index')">Dashboard</Link>
-			</li>
-			<li>
-				<a :href="route('test')" target="_blank">Testing</a>
-			</li>
-			<li>
-				<a href="https://github.com/chrypton/homepage" target="_blank">GitHub Repo</a>
-			</li>
-			<li>
-				<a href="https://dev.tools/phpmyadmin" target="_blank">phpMyAdmin</a>
-			</li>
-			<li>
-				<a href="https://laravel.com/docs/11.x/" target="_blank">Laravel Docs</a>
-			</li>
-			<li>
-				<a href="https://laravel.com/api/11.x/" target="_blank">Laravel API</a>
-			</li>
-			<li>
-				<a href="https://chat.openai.com/" target="_blank">ChatGPT 3.5</a>
-			</li>
-			<li v-for="link in links">
-				<Link :href="route(link)">{{ link }}</Link>
-			</li>
+			<template v-for="link in links">
+				<li v-if="link.enabled">
+					<template v-if="link.is_route">
+						<Link v-if="link.target === '_self'" :href="route(link.url)">{{ link.title }}</Link>
+
+						<a v-else :href="route(link.url)" :target="link.target">{{ link.title }}</a>
+					</template>
+
+					<a v-else :href="link.url" :target="link.target" rel="noopener noreferrer">{{ link.title }}</a>
+				</li>
+			</template>
 		</ul>
 	</NavigationPanel>
 </template>
@@ -51,7 +38,7 @@ export default {
 		};
 	},
 	created(){
-		axios.get(route('routes')).then(response => this.links = response.data);
+		axios.get(route('nav.links')).then(response => this.links = response.data);
 	},
 }
 </script>

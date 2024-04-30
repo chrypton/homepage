@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomepageController;
-use App\Http\Controllers\UserSessionController;
+use App\Http\Controllers\NavigatorController;
 
 foreach (glob(__DIR__.'/web/*.php') as $file) {
 	require $file;
@@ -11,16 +10,13 @@ foreach (glob(__DIR__.'/web/*.php') as $file) {
 
 Route::middleware('auth')->group(function () {
 	Route::get('/', [HomepageController::class, 'index'])->name('index');
-});
 
-Route::name('users.')->group(function () {
-	Route::middleware('guest')->group(function () {
-		Route::get('/register', [UserController::class, 'create'])->name('register');
-		Route::post('/register', [UserController::class, 'store'])->name('store');
-
-		Route::get('/login', [UserSessionController::class, 'create'])->name('login');
-		Route::post('/login', [UserSessionController::class, 'store'])->name('auth');
+	Route::prefix('nav')->name('nav.')->group(function () {
+		Route::get('/links', [NavigatorController::class, 'links'])->name('links');
+		Route::get('/youtube', [NavigatorController::class, 'youtube'])->name('youtube');
 	});
-
-	Route::get('/logout', [UserSessionController::class, 'destroy'])->middleware('auth')->name('logout');
 });
+
+Route::get('/test', function () {
+	return;
+})->name('test');
