@@ -18,7 +18,7 @@ class CSV {
 		});
 	}
 
-	static function open($filepath): Collection
+	static function parse($filepath): Collection
 	{
 		$csv = new CSV($filepath);
 		return $csv->data;
