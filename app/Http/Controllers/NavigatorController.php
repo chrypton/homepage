@@ -20,7 +20,7 @@ class NavigatorController extends Controller
 	public function youtube()
 	{
 		$filteredVideos = [];
-		foreach(YoutubeChannel::all() as $channel){ # Change with user's youtube channels
+		foreach(auth()->user()->youtubeSubscriptions as $channel){
 			$filteredVideos = [...$filteredVideos, ...cache()->remember("youtube_uploads_{$channel['channel_id']}", 600, function () use ($channel) {
 				$responseUploads = Http::get('https://www.googleapis.com/youtube/v3/playlistItems', [
 					'key' => env('KEY_YOUTUBE'),
