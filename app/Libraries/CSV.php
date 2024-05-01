@@ -10,7 +10,7 @@ class CSV {
 
 	function __construct(string $filepath)
 	{
-		$this->data = collect(array_map('str_getcsv', file(base_path("storage/csv/{$filepath}"))));
+		$this->data = collect(array_map('str_getcsv', file($filepath)));
 		$this->headers = collect($this->data->shift());
 		
 		$this->data->transform(function ($csvRow){
@@ -18,9 +18,15 @@ class CSV {
 		});
 	}
 
-	static function parse($filepath): Collection
+	static function parse($filepath): Collection|Bool
 	{
-		$csv = new CSV($filepath);
-		return $csv->data;
+		$filepath = base_path("storage/csv/{$filepath}");
+
+		if(file_exists($filepath)){
+			$csv = new CSV($filepath);
+			return $csv->data;
+		} else {
+			return false;
+		}
 	}
 }
