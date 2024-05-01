@@ -57,6 +57,8 @@ class NavigatorController extends Controller
 			})];
 		}
 	
+		array_multisort(array_column($filteredVideos, 'timestamp'), SORT_DESC, $filteredVideos);
+
 		return $filteredVideos;
 	}
 }
