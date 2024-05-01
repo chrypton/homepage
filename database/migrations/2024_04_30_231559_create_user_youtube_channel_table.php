@@ -6,24 +6,24 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('user_youtube_channel', function (Blueprint $table) {
-            $table->foreignUlid('user_id')->index()->constrained()->onDelete('cascade');
-            $table->foreignUlid('youtube_channel_id')->index()->constrained()->onDelete('cascade');
+	/**
+	 * Run the migrations.
+	 */
+	public function up(): void
+	{
+		Schema::create('user_youtube_channel', function (Blueprint $table) {
+			$table->foreignUlid('user_id')->index()->constrained()->onDelete('cascade');
+			$table->foreignUlid('youtube_channel_id')->index()->constrained()->onDelete('cascade');
 
 			$table->primary(['user_id', 'youtube_channel_id']);
-        });
-    }
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('user_youtube_channel');
-    }
+	/**
+	 * Reverse the migrations.
+	 */
+	public function down(): void
+	{
+		Schema::dropIfExists('user_youtube_channel');
+	}
 };
