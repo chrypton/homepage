@@ -17,4 +17,10 @@ class CSV {
 			return $this->headers->combine($csvRow);
 		});
 	}
+
+	static function open($filepath): Collection
+	{
+		$csv = new CSV($filepath);
+		return $csv->data;
+	}
 }
