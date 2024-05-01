@@ -49,8 +49,6 @@ class NavigatorController extends Controller
 					];
 				});
 	
-				array_multisort(array_column($formattedVideos, 'timestamp'), SORT_DESC, $formattedVideos);
-	
 				return Arr::where($formattedVideos, function ($video) {
 					return $video['timestamp']->greaterThan(Carbon::now()->subWeek());
 				});
