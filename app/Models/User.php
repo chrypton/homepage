@@ -28,7 +28,7 @@ class User extends Authenticatable
 		'bookmark_increment',
 	];
 
-	protected function casts(): array
+	protected function casts(): Array
 	{
 		return [
 			'email_verified_at' => 'datetime',

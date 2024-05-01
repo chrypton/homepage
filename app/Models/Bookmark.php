@@ -24,7 +24,7 @@ class Bookmark extends Model
 		'target',
 	];
 
-	protected function casts(): array
+	protected function casts(): Array
 	{
 		return [
 			'enabled' => 'boolean',
