@@ -10,7 +10,7 @@ class CSV {
 
 	function __construct(string $filepath)
 	{
-		$this->data = collect(array_map('str_getcsv', file(base_path("storage/csv/{$filepath}/"))));
+		$this->data = collect(array_map('str_getcsv', file(base_path("storage/csv/{$filepath}"))));
 		$this->headers = collect($this->data->shift());
 		
 		$this->data->transform(function ($csvRow){
